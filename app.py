@@ -17,10 +17,29 @@ st.markdown("---")
 st.write("Get personalized crop recommendations based on soil and environmental conditions.")
 
 # Load the model
+@st.cache_resource
+def load_model():
+    import os
+    model_path = 'crop_recommendation.joblib'
+    
+    # Try multiple possible paths
+    possible_paths = [
+        model_path,
+        os.path.join(os.path.dirname(__file__), model_path),
+        os.path.abspath(model_path)
+    ]
+    
+    for path in possible_paths:
+        if os.path.exists(path):
+            return joblib.load(path)
+    
+    raise FileNotFoundError(f"Model file not found in any of these locations: {possible_paths}")
+
 try:
-    model = joblib.load('crop_recommendation.joblib')
+    model = load_model()
 except Exception as e:
-    st.error(f"Error loading model: {e}")
+    st.error(f"❌ Error loading model: {e}")
+    st.error("Please ensure 'crop_recommendation.joblib' is in the project directory.")
     st.stop()
 
 # Create two columns for input fields

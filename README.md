@@ -29,7 +29,7 @@ A machine learning-powered web application that recommends the most suitable cro
 
 1. **Clone or download the repository**:
    ```bash
-   git clone <repository-url>
+   git clone 'https://github.com/TechSubrat-netizen/Crop_Recommendation_System'
    cd Crop_Detection_System
    ```
 
@@ -84,18 +84,7 @@ A machine learning-powered web application that recommends the most suitable cro
 | Soil pH | 3.5-9.5 | - | Soil acidity/alkalinity |
 | Rainfall | 20-300 | mm | Annual rainfall |
 
-## 📁 Project Structure
 
-```
-Crop_Detection_System/
-├── app.py                          # Main Streamlit application
-├── crop_recommendation.joblib      # Pre-trained ML model
-├── crop_recommendation.csv         # Training/reference dataset
-├── crop_recomendation_system_model.ipynb  # Jupyter notebook (model development)
-├── requirements.txt                # Python dependencies
-├── .gitignore                      # Git ignore rules
-└── README.md                       # This file
-```
 
 ## 🤖 Model Information
 
@@ -120,16 +109,47 @@ The model recommends from a variety of crops including rice, wheat, maize, chick
 ### Model not found
 - Ensure `crop_recommendation.joblib` is in the project directory
 - Verify the file path in the error message
+- The app will check multiple paths automatically
 
-### Dependencies not installed
-- Run: `pip install -r requirements.txt`
-- Or: `pip install streamlit joblib scikit-learn pandas numpy`
+### Dependencies installation fails
+**Solution 1 - Use setup script:**
+```bash
+# Windows
+python setup.py
+# or
+setup.bat
+
+# macOS/Linux
+python setup.py
+```
+
+**Solution 2 - Manual installation with flexible versions:**
+```bash
+pip install --upgrade pip
+pip install streamlit joblib scikit-learn pandas numpy
+pip install -r requirements.txt --no-cache-dir
+```
+
+**Solution 3 - Individual package installation:**
+```bash
+pip install streamlit
+pip install joblib
+pip install scikit-learn
+pip install pandas
+pip install numpy
+```
 
 ### Port already in use
 - Run Streamlit on a different port:
   ```bash
   streamlit run app.py --server.port 8502
   ```
+
+### Non-zero exit code during deployment
+- Clear pip cache: `pip install --no-cache-dir -r requirements.txt`
+- Update pip: `python -m pip install --upgrade pip`
+- Use flexible version constraints (already in requirements.txt)
+- Check internet connection and try again
 
 ## 📝 Data Source
 
